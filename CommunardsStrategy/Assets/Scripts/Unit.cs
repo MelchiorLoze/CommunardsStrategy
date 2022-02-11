@@ -8,12 +8,24 @@ public abstract class Unit : MonoBehaviour
     void Start()
     {
         // Used to find a target every O.5 seconds
-        InvokeRepeating("GetTarget", 0f, 0.5f);  
+        InvokeRepeating("GetTarget", 0f, 0.5f);
+
+        // Used to attack at the right firerate
+        InvokeRepeating("Attack", 0f, fireRate);
     }
 
     // Get the closest enemy that is in range
-    void GetTarget()
+    protected void GetTarget()
     {
+        if (target != null)
+        {
+            float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+            if (distanceToTarget > range)
+                target = null;
+            else
+                return;
+        }
+
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
@@ -29,14 +41,16 @@ public abstract class Unit : MonoBehaviour
         }
 
         if (nearestEnemy != null && shortestDistance <= range)
-        {
-            target = nearestEnemy.transform;
-            targetUnit = nearestEnemy.GetComponent<Unit>();
-        }
+            target = nearestEnemy.GetComponent<Unit>();
         else
-        {
             target = null;
-        }
+    }
+
+    // Attack the target
+    protected void Attack()
+    {
+        if (target != null)
+            target.TakeDamage(damage);
     }
 
     // Update is called once per frame
@@ -44,20 +58,12 @@ public abstract class Unit : MonoBehaviour
     {
     }
 
-    // Attack the selected unit
-    protected void Attack(Unit unit)
-    {
-        unit.TakeDamage(damage);
-    }
-
     // Take damage
     protected void TakeDamage(int damage)
     {
         health -= damage;
         if (health <= 0)
-        {
             Die();
-        }
     }
 
     // Function called when the unit is dead
@@ -73,14 +79,11 @@ public abstract class Unit : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    // attack only
-    // public float movementSpeed = 1;
     public int health = 1;
     public int damage = 1;
     public float fireRate = 1;
     public float range = 1;
     public string enemyTag;
 
-    private Transform target;
-    private Unit targetUnit;
+    protected Unit target = null;
 }
