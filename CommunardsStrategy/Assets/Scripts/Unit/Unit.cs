@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         // Used to find a target every O.5 seconds
         InvokeRepeating("GetTarget", 0f, 0.5f);
@@ -44,6 +44,7 @@ public abstract class Unit : MonoBehaviour
             target = nearestEnemy.GetComponent<Unit>();
         else
             target = null;
+        
     }
 
     // Attack the target
@@ -54,7 +55,7 @@ public abstract class Unit : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
     }
 
