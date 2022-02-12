@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  damage: 1
+  damage: 3
   fireRate: 0.75
   range: 0.9
   enemyTag: Versaillais
