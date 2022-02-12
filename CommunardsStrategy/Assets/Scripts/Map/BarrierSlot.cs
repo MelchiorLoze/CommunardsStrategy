@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slot : MonoBehaviour
+public class BarrierSlot : MonoBehaviour
 {
+
     public SpriteRenderer spriteRenderer;
     public Sprite slotSprite;
     public Sprite slotOnHoverSprite;
 
-    private GameObject soldierOnSlot;
+    private GameObject barrierOnSlot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,45 +25,47 @@ public class Slot : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if(soldierOnSlot == null)
+        if (barrierOnSlot == null)
             spriteRenderer.sprite = slotOnHoverSprite;
     }
 
     private void OnMouseExit()
     {
-        if(soldierOnSlot == null)
+        if (barrierOnSlot == null)
             spriteRenderer.sprite = slotSprite;
     }
+
 
     private void OnMouseDown()
     {
         //todo - différence click droit / gauche
         //       pour menu (upgrade / sell) ou build
-        if(!CanPlaceSoldier())
+        if (!CanPlaceBarrier())
         {
             //todo - overlay ? 
             return;
         }
         else
         {
-            GameObject soldierToBuild = BuildManager.instance.GetAllyToBuild();
-            if(soldierToBuild == null)
+            if (BuildManager.instance.isBarrier)
             {
-                //No soldier selected
+                GameObject barrierToBuild = BuildManager.instance.GetAllyToBuild();
+                if (barrierToBuild == null)
+                {
+                    //No soldier selected
 
-                //todo - error message ? 
-                print("no soldier selected");
-                return;
+                    //todo - error message ? 
+                    print("no unit selected");
+                    return;
+                }
+                barrierOnSlot = (GameObject)Instantiate(barrierToBuild, transform.position, transform.rotation);
+                spriteRenderer.enabled = false;
             }
-            soldierOnSlot = (GameObject)Instantiate(soldierToBuild, transform.position, transform.rotation);
-            spriteRenderer.enabled = false;
         }
-
     }
 
-
-    private bool CanPlaceSoldier()
+    private bool CanPlaceBarrier()
     {
-        return soldierOnSlot == null;
+        return barrierOnSlot == null;
     }
 }
