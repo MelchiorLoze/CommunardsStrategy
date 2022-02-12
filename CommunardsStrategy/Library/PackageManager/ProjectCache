@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637800312521754942
+      ticks: 637802775600528397
     m_Hash: 3533921098
   m_LockFileStatus:
     m_FilePath: D:/Documents/GameProjects/epita/CommunardsStrategy/CommunardsStrategy/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637800312521754942
+      ticks: 637802775600538322
     m_Hash: 2154246561
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}

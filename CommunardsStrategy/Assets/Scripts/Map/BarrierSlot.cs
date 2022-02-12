@@ -9,6 +9,8 @@ public class BarrierSlot : MonoBehaviour
     public Sprite slotSprite;
     public Sprite slotOnHoverSprite;
 
+    public GameObject waypointOrientation;
+
     private GameObject barrierOnSlot;
 
     // Start is called before the first frame update
@@ -59,6 +61,7 @@ public class BarrierSlot : MonoBehaviour
                     return;
                 }
                 barrierOnSlot = (GameObject)Instantiate(barrierToBuild, transform.position, transform.rotation);
+                barrierOnSlot.GetComponent<Barrier>().Reorientation(waypointOrientation.transform);
                 spriteRenderer.enabled = false;
             }
         }
