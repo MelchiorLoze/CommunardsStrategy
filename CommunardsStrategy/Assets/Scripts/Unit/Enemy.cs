@@ -9,6 +9,7 @@ public class Enemy : Unit
     {
         base.Start();
         waypointTarget = Waypoint.waypoints[waypointIndex];
+        RotateTowardsTarget(waypointTarget);
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class Enemy : Unit
         {
             waypointIndex++;
             waypointTarget = Waypoint.waypoints[waypointIndex];
+            RotateTowardsTarget(waypointTarget);
         }
     }
 

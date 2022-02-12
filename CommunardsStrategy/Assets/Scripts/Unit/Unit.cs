@@ -17,8 +17,10 @@ public abstract class Unit : MonoBehaviour
     // Get the closest enemy that is in range
     protected void GetTarget()
     {
+        // if target already selected
         if (target != null)
         {
+            // verifies if it is still in range
             float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
             if (distanceToTarget > range)
                 target = null;
@@ -30,6 +32,7 @@ public abstract class Unit : MonoBehaviour
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
+        // finds the closest enemy
         foreach (GameObject enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -80,11 +83,20 @@ public abstract class Unit : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
+    protected void RotateTowardsTarget(Transform target)
+    {
+        Vector3 vectorToTarget = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
+    }
+
     public int health = 1;
     public int damage = 1;
     public float fireRate = 1;
     public float range = 1;
     public string enemyTag;
+    public float rotationSpeed = 0.5f;
 
     protected Unit target = null;
 }

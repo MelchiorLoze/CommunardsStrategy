@@ -35,6 +35,9 @@ public class Slot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // forbids barrier from being put down on slots
+        if (BuildManager.instance.isBarrier)
+            return;
         //todo - différence click droit / gauche
         //       pour menu (upgrade / sell) ou build
         if(!CanPlaceSoldier())
