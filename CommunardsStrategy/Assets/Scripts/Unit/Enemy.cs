@@ -17,7 +17,12 @@ public class Enemy : Unit
     {
         base.Update();
         if (target == null)
+        {
             MoveToNextWaypoint();
+            RotateTowardsTarget(waypointTarget.transform);
+        }
+        else
+            RotateTowardsTarget(target.transform);
     }
 
     void MoveToNextWaypoint()
@@ -25,7 +30,7 @@ public class Enemy : Unit
         Vector3 direction = waypointTarget.position - transform.position;
         transform.Translate(direction.normalized * moveSpeed * Time.deltaTime, Space.World);
 
-        if (Vector3.Distance(transform.position, waypointTarget.position) <= 0.2f)
+        if (Vector3.Distance(transform.position, waypointTarget.position) <= 0.1f)
             GetNextWaypoint();
     }
 

@@ -8,7 +8,7 @@ public abstract class Unit : MonoBehaviour
     public virtual void Start()
     {
         // Used to find a target every O.5 seconds
-        InvokeRepeating("GetTarget", 0f, 0.5f);
+        InvokeRepeating("GetTarget", 0f, 0.1f);
 
         // Used to attack at the right firerate
         InvokeRepeating("Attack", 0f, fireRate);
