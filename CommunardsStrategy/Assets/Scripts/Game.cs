@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.Threading.Tasks;
 
 public class Game : MonoBehaviour
@@ -16,37 +17,34 @@ public class Game : MonoBehaviour
         elapsedTime++;
         if (elapsedTime % 2 == 0)
             return;
-        if (elapsedTime > 3)
+
+        int soldierAmount = Math.Min(Math.Max(elapsedTime / 10, 2), 15);
+        int gunnerAmount = Math.Min(Math.Max(elapsedTime / 20, 0), 10);;
+        int cavalierAmount = Math.Min(Math.Max(elapsedTime / 35, 0), 8); ;
+        int canonAmount = Math.Min(Math.Max(elapsedTime / 50, 0), 5); ;
+
+        for (int i = 0; i < soldierAmount; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                Instantiate(soldier, spawnPosition, Quaternion.identity);
-                await Task.Delay(100);
-            }
+            Instantiate(soldier, spawnPosition, Quaternion.identity);
+            await Task.Delay(100);
         }
-        if (elapsedTime > 10)
+
+        for (int i = 0; i < gunnerAmount; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                Instantiate(gunner, spawnPosition, Quaternion.identity);
-                await Task.Delay(100);
-            }
+            Instantiate(gunner, spawnPosition, Quaternion.identity);
+            await Task.Delay(100);
         }
-        if (elapsedTime > 20)
+
+        for (int i = 0; i < cavalierAmount; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                Instantiate(cavalier, spawnPosition, Quaternion.identity);
-                await Task.Delay(100);
-            }
+            Instantiate(cavalier, spawnPosition, Quaternion.identity);
+            await Task.Delay(100);
         }
-        if (elapsedTime > 30)
+
+        for (int i = 0; i < canonAmount; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                Instantiate(canon, spawnPosition, Quaternion.identity);
-                await Task.Delay(100);
-            }
+            Instantiate(canon, spawnPosition, Quaternion.identity);
+            await Task.Delay(100);
         }
     }
 
