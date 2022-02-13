@@ -28,6 +28,11 @@ public class Shop : MonoBehaviour
         buildManager.SetSoldierToBuild(buildManager.allyBarrierPrefab,  (int)unitCost.SOLDIER, true);
     }
 
+    public void SellMode()
+    {
+        buildManager.setSellMode();
+    }
+
     private enum unitCost
     {
         SOLDIER = 100,

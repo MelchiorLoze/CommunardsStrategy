@@ -24,6 +24,8 @@ public class BuildManager : MonoBehaviour
     private int nextBackground = 0;
     private int unitToBeBuildCost = 0;
 
+    public bool isInSellMode = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -37,11 +39,18 @@ public class BuildManager : MonoBehaviour
         soldierToBuild = soldier;
         isBarrier = _isBarrier;
         unitToBeBuildCost = cost;
+        isInSellMode = false;
     }
 
     public void buySoldier()
     {
         removeMoney(unitToBeBuildCost);
+    }
+
+    public void setSellMode()
+    {
+        isInSellMode = true;
+        soldierToBuild = null;
     }
 
     #region utility func
@@ -78,6 +87,11 @@ public class BuildManager : MonoBehaviour
     public bool canBuild()
     {
         return money - unitToBeBuildCost > 0;
+    }
+
+    public int GetUnitToBuildCost()
+    {
+        return unitToBeBuildCost;
     }
     #endregion
 
