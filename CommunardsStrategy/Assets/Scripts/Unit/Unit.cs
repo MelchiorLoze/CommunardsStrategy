@@ -44,12 +44,14 @@ public abstract class Unit : MonoBehaviour
             }
         }
 
-        Unit potentielTarget = nearestEnemy.GetComponent<Unit>();
-        if (nearestEnemy != null && isTargetFocusable(potentielTarget, shortestDistance))
-            target = potentielTarget;
+        if (nearestEnemy != null)
+        {
+            Unit potentielTarget = nearestEnemy.GetComponent<Unit>();
+            if (isTargetFocusable(potentielTarget, shortestDistance))
+                target = potentielTarget;
+        } 
         else
             target = null;
-        
     }
 
     // returns True if the target can be focused on (ie: in range and in field of vision)

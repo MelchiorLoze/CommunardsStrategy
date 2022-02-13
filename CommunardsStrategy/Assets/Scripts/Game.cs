@@ -54,13 +54,12 @@ public class Game : MonoBehaviour
         
     }
 
-    public GameObject battalions;
     public GameObject soldier;
     public GameObject gunner;
     public GameObject cavalier;
     public GameObject canon;
 
-    public Vector3 spawnPosition = new Vector3(-11, -1, 89);
+    public Vector3 spawnPosition = new Vector3(-11, -1, 0);
 
     private int elapsedTime = 0;
 }
