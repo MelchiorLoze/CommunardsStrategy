@@ -99,5 +99,6 @@ MonoBehaviour:
   damage: 0
   fireRate: 0
   range: 0
+  viewAngle: 360
   enemyTag: 
   rotationSpeed: 1000

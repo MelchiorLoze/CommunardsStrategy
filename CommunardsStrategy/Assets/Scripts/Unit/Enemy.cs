@@ -18,7 +18,7 @@ public class Enemy : Unit
         base.Update();
         if (target == null)
         {
-            MoveToNextWaypoint();
+            // MoveToNextWaypoint();
             RotateTowardsTarget(waypointTarget.transform);
         }
         else
