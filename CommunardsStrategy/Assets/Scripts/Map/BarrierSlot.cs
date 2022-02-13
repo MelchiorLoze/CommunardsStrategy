@@ -60,9 +60,14 @@ public class BarrierSlot : MonoBehaviour
                     print("no unit selected");
                     return;
                 }
-                barrierOnSlot = (GameObject)Instantiate(barrierToBuild, transform.position, transform.rotation);
-                barrierOnSlot.GetComponent<Barrier>().Reorientation(waypointOrientation.transform);
-                spriteRenderer.enabled = false;
+
+                if (BuildManager.instance.canBuild())
+                {
+                    BuildManager.instance.buySoldier();
+                    barrierOnSlot = (GameObject)Instantiate(barrierToBuild, transform.position, transform.rotation);
+                    barrierOnSlot.GetComponent<Barrier>().Reorientation(waypointOrientation.transform);
+                    spriteRenderer.enabled = false;
+                }
             }
         }
     }

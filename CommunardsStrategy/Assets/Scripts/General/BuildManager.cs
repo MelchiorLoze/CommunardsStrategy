@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,33 +11,74 @@ public class BuildManager : MonoBehaviour
     public GameObject allyArtilleristPrefab;
     public GameObject allyBarrierPrefab;
 
+    public UnityEngine.UI.Image background;
+    public Sprite[] backgrounds;
+
+    public int money;
+    public UnityEngine.UI.Text moneyText;
+
     public static BuildManager instance;
 
     public bool isBarrier = false;
 
+    private int nextBackground = 0;
+    private int unitToBeBuildCost = 0;
 
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         soldierToBuild = null;
+        money = 1000;
     }
 
+    public void SetSoldierToBuild(GameObject soldier, int cost, bool _isBarrier = false)
+    {
+        soldierToBuild = soldier;
+        isBarrier = _isBarrier;
+        unitToBeBuildCost = cost;
+    }
+
+    public void buySoldier()
+    {
+        removeMoney(unitToBeBuildCost);
+    }
+
+    #region utility func
     public GameObject GetAllyToBuild()
     {
         return soldierToBuild;
     }
-
-    public void SetSoldierToBuild(GameObject soldier, bool _isBarrier = false)
+    public void ChangeBackground()
     {
-        soldierToBuild = soldier;
-        isBarrier = _isBarrier;
+        background.overrideSprite = backgrounds[nextBackground];
+        nextBackground++;
+    }
+    private void changeMoneyText()
+    {
+        moneyText.text = money + " 𝑓";
+    }
+    public void addMoney(int amount)
+    {
+        money += amount;
+
+        changeMoneyText();
     }
 
-    public void ApplyShopUI(Slot slot)
+    private void removeMoney(int amount)
     {
-        //preparing a function
-        //to teleport shop UI 
-        //to a specific slot
+        if (amount > money)
+        {
+            return;
+        }
+        money -= amount;
+        changeMoneyText();
     }
+
+    public bool canBuild()
+    {
+        return money - unitToBeBuildCost > 0;
+    }
+    #endregion
+
 }

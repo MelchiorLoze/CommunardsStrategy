@@ -56,8 +56,12 @@ public class Slot : MonoBehaviour
                 print("no soldier selected");
                 return;
             }
-            soldierOnSlot = (GameObject)Instantiate(soldierToBuild, transform.position, transform.rotation);
-            spriteRenderer.enabled = false;
+            if (BuildManager.instance.canBuild())
+            {
+                BuildManager.instance.buySoldier();
+                soldierOnSlot = (GameObject)Instantiate(soldierToBuild, transform.position, transform.rotation);
+                spriteRenderer.enabled = false;
+            }
         }
 
     }
