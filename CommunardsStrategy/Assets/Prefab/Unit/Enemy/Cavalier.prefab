@@ -99,7 +99,8 @@ MonoBehaviour:
   damage: 3
   fireRate: 1
   range: 0.4
+  viewAngle: 120
   enemyTag: Barriere
   rotationSpeed: 10
-  moveSpeed: 1.4
   moneyOnDeath: 200
+  moveSpeed: 1.4

@@ -99,5 +99,6 @@ MonoBehaviour:
   damage: 3
   fireRate: 0.75
   range: 0.9
+  viewAngle: 360
   enemyTag: Versaillais
   rotationSpeed: 10

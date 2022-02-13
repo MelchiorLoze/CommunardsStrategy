@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -15,17 +16,17 @@ public abstract class Unit : MonoBehaviour
     }
 
     // Get the closest enemy that is in range
-    protected void GetTarget()
+    protected virtual void GetTarget()
     {
         // if target already selected
         if (target != null)
         {
             // verifies if it is still in range
             float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-            if (distanceToTarget > range)
-                target = null;
-            else
+            if (isTargetFocusable(target, distanceToTarget))
                 return;
+            else
+                target = null;
         }
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
@@ -43,11 +44,22 @@ public abstract class Unit : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null && shortestDistance <= range)
-            target = nearestEnemy.GetComponent<Unit>();
+        Unit potentielTarget = nearestEnemy.GetComponent<Unit>();
+        if (nearestEnemy != null && isTargetFocusable(potentielTarget, shortestDistance))
+            target = potentielTarget;
         else
             target = null;
         
+    }
+
+    // returns True if the target can be focused on (ie: in range and in field of vision)
+    protected bool isTargetFocusable(Unit target, float distanceToTarget)
+    {
+        Vector3 forward = transform.right;
+        Vector2 targetVector = target.transform.position - transform.position;
+        float angle = Vector2.Angle(forward, targetVector);
+
+        return distanceToTarget <= range && angle <= (viewAngle / 2);
     }
 
     // Attack the target
@@ -81,8 +93,19 @@ public abstract class Unit : MonoBehaviour
     {
         Gizmos.color = new Color(0.87f, 0f, 0f);
         Gizmos.DrawWireSphere(transform.position, range);
+
+        Handles.color = new Color(0.87f, 0f, 0f, 0.2f);
+
+        float desiredAngle = Mathf.Deg2Rad * (viewAngle / 2);
+        Vector3 forward = transform.right;
+        float x = (Mathf.Cos(desiredAngle) * forward.x) - (Mathf.Sin(desiredAngle) * forward.y);
+        float y = (Mathf.Sin(desiredAngle) * forward.x) + (Mathf.Cos(desiredAngle) * forward.y);
+
+        // draws the field of vision of the Unit
+        Handles.DrawSolidArc(transform.position, -new Vector3(0, 0, 1), new Vector3(x, y, 0), viewAngle, range);
     }
 
+    // rotates the gameObject towards the target
     protected void RotateTowardsTarget(Transform target)
     {
         Vector3 vectorToTarget = target.transform.position - transform.position;
@@ -95,6 +118,7 @@ public abstract class Unit : MonoBehaviour
     public int damage = 1;
     public float fireRate = 1;
     public float range = 1;
+    public int viewAngle = 360;
     public string enemyTag;
     public float rotationSpeed = 0.5f;
 
