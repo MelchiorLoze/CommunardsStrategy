@@ -98,7 +98,7 @@ MonoBehaviour:
   health: 2
   damage: 3
   fireRate: 2
-  range: 1
+  range: 0.6
   enemyTag: Barriere
   rotationSpeed: 10
   moveSpeed: 1
