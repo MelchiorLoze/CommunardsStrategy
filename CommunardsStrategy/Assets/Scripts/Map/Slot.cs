@@ -9,6 +9,7 @@ public class Slot : MonoBehaviour
     public Sprite slotOnHoverSprite;
 
     private GameObject soldierOnSlot;
+    private int soldierOnSlotPrice;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,12 +39,18 @@ public class Slot : MonoBehaviour
         // forbids barrier from being put down on slots
         if (BuildManager.instance.isBarrier)
             return;
-        //todo - différence click droit / gauche
-        //       pour menu (upgrade / sell) ou build
+
         if(!CanPlaceSoldier())
         {
-            //todo - overlay ? 
-            return;
+            if (BuildManager.instance.isInSellMode)
+            {
+                //todo - overlay ?
+                Destroy(soldierOnSlot);
+                spriteRenderer.sprite = slotSprite;
+                spriteRenderer.enabled = true;
+                BuildManager.instance.addMoney(soldierOnSlotPrice / 3);
+                return;
+            }
         }
         else
         {
@@ -56,8 +63,14 @@ public class Slot : MonoBehaviour
                 print("no soldier selected");
                 return;
             }
-            soldierOnSlot = (GameObject)Instantiate(soldierToBuild, transform.position, transform.rotation);
-            spriteRenderer.enabled = false;
+            if (BuildManager.instance.canBuild())
+            {
+                BuildManager.instance.buySoldier();
+                soldierOnSlot = (GameObject)Instantiate(soldierToBuild, transform.position, transform.rotation);
+                spriteRenderer.enabled = false;
+
+                soldierOnSlotPrice = BuildManager.instance.GetUnitToBuildCost();
+            }
         }
 
     }

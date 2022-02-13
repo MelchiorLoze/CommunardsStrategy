@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2885654966661882431}
   - component: {fileID: 1359364069824522219}
-  - component: {fileID: 7756816928652662880}
+  - component: {fileID: 8088074916765813135}
   m_Layer: 0
   m_Name: QG
   m_TagString: Barriere
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7756816928652662880
+--- !u!114 &8088074916765813135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6649105295056972469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2dbfe9ba55e9754f86f3692a9282fe0, type: 3}
+  m_Script: {fileID: 11500000, guid: af3d060512f667d448a29db7cc5e62d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 500

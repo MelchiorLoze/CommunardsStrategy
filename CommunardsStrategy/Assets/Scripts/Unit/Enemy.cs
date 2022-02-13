@@ -44,6 +44,13 @@ public class Enemy : Unit
         }
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        BuildManager.instance.addMoney(moneyOnDeath);
+    }
+
+    public int moneyOnDeath = 100;
     public float moveSpeed = 1;
     private Transform waypointTarget;
     private int waypointIndex = 0;

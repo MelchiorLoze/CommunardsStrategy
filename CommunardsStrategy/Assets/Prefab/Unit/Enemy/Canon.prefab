@@ -102,3 +102,4 @@ MonoBehaviour:
   enemyTag: Barriere
   rotationSpeed: 10
   moveSpeed: 0.8
+  moneyOnDeath: 500
