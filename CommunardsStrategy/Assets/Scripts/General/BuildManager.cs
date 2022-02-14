@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class BuildManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class BuildManager : MonoBehaviour
     public Sprite[] backgrounds;
 
     public int money;
-    public UnityEngine.UI.Text moneyText;
+    public TextMeshProUGUI moneyText;
 
     public static BuildManager instance;
 
@@ -75,7 +76,7 @@ public class BuildManager : MonoBehaviour
     }
     private void changeMoneyText()
     {
-        moneyText.text = money + " 𝑓";
+        moneyText.text = money.ToString();
     }
     public void addMoney(int amount)
     {
