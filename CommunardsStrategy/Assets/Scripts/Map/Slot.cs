@@ -60,7 +60,6 @@ public class Slot : MonoBehaviour
                 //No soldier selected
 
                 //todo - error message ? 
-                print("no soldier selected");
                 return;
             }
             if (BuildManager.instance.canBuild())
