@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BuildManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BuildManager : MonoBehaviour
     public GameObject allyCanonPrefab;
     public GameObject allyArtilleristPrefab;
     public GameObject allyBarrierPrefab;
+
+    public GameObject[] HQList;
 
     public UnityEngine.UI.Image background;
     public Sprite[] backgrounds;
@@ -25,13 +28,20 @@ public class BuildManager : MonoBehaviour
     private int unitToBeBuildCost = 0;
 
     public bool isInSellMode = false;
-
+    
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         soldierToBuild = null;
         money = 1000;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (HQList[HQList.Length - 1] == null)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void SetSoldierToBuild(GameObject soldier, int cost, bool _isBarrier = false)

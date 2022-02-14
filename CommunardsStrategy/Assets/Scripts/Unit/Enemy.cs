@@ -9,19 +9,20 @@ public class Enemy : Unit
     {
         base.Start();
         waypointTarget = Waypoint.waypoints[waypointIndex];
-        RotateTowardsTarget(waypointTarget);
+        if (waypointTarget != null)
+            RotateTowardsTarget(waypointTarget);
     }
 
     // Update is called once per frame
     public override void Update()
     {
         base.Update();
-        if (target == null)
+        if (target == null && waypointTarget != null)
         {
             MoveToNextWaypoint();
             RotateTowardsTarget(waypointTarget.transform);
         }
-        else
+        else if (target != null)
             RotateTowardsTarget(target.transform);
     }
 
@@ -42,6 +43,8 @@ public class Enemy : Unit
             waypointTarget = Waypoint.waypoints[waypointIndex];
             RotateTowardsTarget(waypointTarget);
         }
+        else
+            waypointTarget = null;
     }
 
     protected override void Die()
