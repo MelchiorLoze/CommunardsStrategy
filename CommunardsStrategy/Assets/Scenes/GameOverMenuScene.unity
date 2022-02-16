@@ -835,13 +835,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The "Bloody Week" between the 21th and the 28th of May 1871 put an end
+  m_text: 'The "Bloody Week" between the 21st and the 28th of May 1871 put an end
     to the Paris Commune conflict. About 10 000 communards were executed by the government
     of Versailles.
 
     Even today, this event is considered as a major civil war
     episode of French history. Its insurrection movement is part of leftwing culture
-    internationally, which red color comes partially from communard flag.
+    internationally, which red color comes partially from the communard flag.
 
 '
   m_isRightToLeft: 0

@@ -1271,12 +1271,12 @@ MonoBehaviour:
   - {fileID: 794442936}
   background: {fileID: 1231498152}
   backgrounds:
-  - {fileID: 21300000, guid: afd31753b8f096942a3a8861ef1402c7, type: 3}
-  - {fileID: 21300000, guid: afd31753b8f096942a3a8861ef1402c7, type: 3}
-  - {fileID: 21300000, guid: afd31753b8f096942a3a8861ef1402c7, type: 3}
-  - {fileID: 21300000, guid: afd31753b8f096942a3a8861ef1402c7, type: 3}
-  - {fileID: 21300000, guid: afd31753b8f096942a3a8861ef1402c7, type: 3}
-  - {fileID: 21300000, guid: afd31753b8f096942a3a8861ef1402c7, type: 3}
+  - {fileID: 21300000, guid: 30d64c96a410e4346b4a94b02465b2f0, type: 3}
+  - {fileID: 21300000, guid: 324e39f8da2b3764aa16485fc73d3145, type: 3}
+  - {fileID: 21300000, guid: 420e41082bf2b8145bb0885f3e44363c, type: 3}
+  - {fileID: 21300000, guid: aaf3e71fc1fde5543ad36a8479f6ddf2, type: 3}
+  - {fileID: 21300000, guid: 0ee2055e46bc3754dbddcba299614c63, type: 3}
+  - {fileID: 21300000, guid: 0ee2055e46bc3754dbddcba299614c63, type: 3}
   money: 100
   moneyText: {fileID: 244357427}
   isBarrier: 0
@@ -3521,7 +3521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b6c4a399b6309548b7b8fc84b6e0c3a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e9b331d367a025845b9c6a09f9898ee0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
