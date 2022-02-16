@@ -102,5 +102,5 @@ MonoBehaviour:
   viewAngle: 120
   enemyTag: Barriere
   rotationSpeed: 10
-  moneyOnDeath: 150
+  moneyOnDeath: 100
   moveSpeed: 0.9
