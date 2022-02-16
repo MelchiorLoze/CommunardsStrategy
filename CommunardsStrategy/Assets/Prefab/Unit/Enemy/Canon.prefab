@@ -95,12 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33373555ce6ed34fb9be26747bf10f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 6
-  damage: 5
+  health: 11
+  damage: 8
   fireRate: 0.5
   range: 0.9
   viewAngle: 120
   enemyTag: Barriere
   rotationSpeed: 10
-  moneyOnDeath: 500
+  moneyOnDeath: 300
   moveSpeed: 0.8

@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class BuildManager : MonoBehaviour
 {
-    private GameObject soldierToBuild;
+    public static BuildManager instance;
 
     public GameObject allySoldierPrefab;
     public GameObject allyCanonPrefab;
-    public GameObject allyArtilleristPrefab;
+    public GameObject allyGunnerPrefab;
     public GameObject allyBarrierPrefab;
-
     public GameObject[] HQList;
 
     public UnityEngine.UI.Image background;
@@ -20,90 +17,90 @@ public class BuildManager : MonoBehaviour
 
     public int money;
     public TextMeshProUGUI moneyText;
-
-    public static BuildManager instance;
-
+    public bool isInSellMode = false;
     public bool isBarrier = false;
 
     private int nextBackground = 0;
-    private int unitToBeBuildCost = 0;
+    private int unitToBuildCost = 0;
+    private GameObject unitToBuildPrefab;
 
-    public bool isInSellMode = false;
-    
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
-        soldierToBuild = null;
-        money = 1000;
+        unitToBuildPrefab = null;
+        ChangeMoneyText();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Launch game over when last HQ is destroyed
         if (HQList[HQList.Length - 1] == null)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void SetSoldierToBuild(GameObject soldier, int cost, bool _isBarrier = false)
+    public void SetUnitToBuild(GameObject unit, int cost, bool _isBarrier = false)
     {
-        soldierToBuild = soldier;
+        unitToBuildPrefab = unit;
         isBarrier = _isBarrier;
-        unitToBeBuildCost = cost;
+        unitToBuildCost = cost;
         isInSellMode = false;
     }
 
-    public void buySoldier()
+    public void BuySoldier()
     {
-        removeMoney(unitToBeBuildCost);
+        RemoveMoney(unitToBuildCost);
     }
 
-    public void setSellMode()
+    public void SetSellMode()
     {
         isInSellMode = true;
-        soldierToBuild = null;
+        unitToBuildPrefab = null;
     }
 
     #region utility func
-    public GameObject GetAllyToBuild()
+    public GameObject GetUnitToBuild()
     {
-        return soldierToBuild;
+        return unitToBuildPrefab;
     }
+
     public void ChangeBackground()
     {
         background.overrideSprite = backgrounds[nextBackground];
         nextBackground++;
     }
-    private void changeMoneyText()
+
+    private void ChangeMoneyText()
     {
         moneyText.text = money.ToString();
     }
-    public void addMoney(int amount)
+
+    public void AddMoney(int amount)
     {
         money += amount;
 
-        changeMoneyText();
+        ChangeMoneyText();
     }
 
-    private void removeMoney(int amount)
+    private void RemoveMoney(int amount)
     {
         if (amount > money)
         {
             return;
         }
         money -= amount;
-        changeMoneyText();
+        ChangeMoneyText();
     }
 
-    public bool canBuild()
+    public bool IsBuildable()
     {
-        return money - unitToBeBuildCost > 0;
+        return money - unitToBuildCost >= 0;
     }
 
     public int GetUnitToBuildCost()
     {
-        return unitToBeBuildCost;
+        return unitToBuildCost;
     }
     #endregion
-
 }

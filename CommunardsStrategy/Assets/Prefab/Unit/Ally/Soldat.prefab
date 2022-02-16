@@ -96,9 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  damage: 1
-  fireRate: 1
-  range: 0.19
+  damage: 4
+  fireRate: 2
+  range: 0.3
   viewAngle: 360
   enemyTag: Versaillais
-  rotationSpeed: 0.5
+  rotationSpeed: 1

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Slot : MonoBehaviour
@@ -8,75 +6,60 @@ public class Slot : MonoBehaviour
     public Sprite slotSprite;
     public Sprite slotOnHoverSprite;
 
-    private GameObject soldierOnSlot;
-    private int soldierOnSlotPrice;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected GameObject unitOnSlot;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private int unitOnSlotPrice;
 
     private void OnMouseOver()
     {
-        if(soldierOnSlot == null)
+        if (IsSlotFree())
             spriteRenderer.sprite = slotOnHoverSprite;
     }
 
     private void OnMouseExit()
     {
-        if(soldierOnSlot == null)
+        if (IsSlotFree())
             spriteRenderer.sprite = slotSprite;
     }
 
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         // forbids barrier from being put down on slots
         if (BuildManager.instance.isBarrier)
             return;
 
-        if(!CanPlaceSoldier())
+        if (!IsSlotFree())
         {
             if (BuildManager.instance.isInSellMode)
             {
-                //todo - overlay ?
-                Destroy(soldierOnSlot);
+                Destroy(unitOnSlot);
                 spriteRenderer.sprite = slotSprite;
                 spriteRenderer.enabled = true;
-                BuildManager.instance.addMoney(soldierOnSlotPrice / 3);
+                BuildManager.instance.AddMoney(unitOnSlotPrice / 3);
                 return;
             }
         }
         else
         {
-            GameObject soldierToBuild = BuildManager.instance.GetAllyToBuild();
-            if(soldierToBuild == null)
+            GameObject soldierToBuild = BuildManager.instance.GetUnitToBuild();
+            if (soldierToBuild == null)
             {
                 //No soldier selected
-
-                //todo - error message ? 
                 return;
             }
-            if (BuildManager.instance.canBuild())
+            if (BuildManager.instance.IsBuildable())
             {
-                BuildManager.instance.buySoldier();
-                soldierOnSlot = (GameObject)Instantiate(soldierToBuild, transform.position, transform.rotation);
+                BuildManager.instance.BuySoldier();
+                unitOnSlot = (GameObject) Instantiate(soldierToBuild, transform.position, transform.rotation);
                 spriteRenderer.enabled = false;
 
-                soldierOnSlotPrice = BuildManager.instance.GetUnitToBuildCost();
+                unitOnSlotPrice = BuildManager.instance.GetUnitToBuildCost();
             }
         }
-
     }
 
-
-    private bool CanPlaceSoldier()
+    protected bool IsSlotFree()
     {
-        return soldierOnSlot == null;
+        return unitOnSlot == null;
     }
 }

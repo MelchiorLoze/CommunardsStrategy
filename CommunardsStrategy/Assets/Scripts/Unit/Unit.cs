@@ -1,10 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 public abstract class Unit : MonoBehaviour
 {
+    public int health = 1;
+    public int damage = 1;
+    public float fireRate = 1;
+    public float range = 1;
+    public int viewAngle = 360;
+    public string enemyTag;
+    public float rotationSpeed = 0.5f;
+
+    protected Unit target = null;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -12,7 +20,7 @@ public abstract class Unit : MonoBehaviour
         InvokeRepeating("GetTarget", 0f, 0.1f);
 
         // Used to attack at the right firerate
-        InvokeRepeating("Attack", 0f, fireRate);
+        InvokeRepeating("Attack", 0f, 1 / fireRate);
     }
 
     // Get the closest enemy that is in range
@@ -74,14 +82,14 @@ public abstract class Unit : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        if (health <= 0)
+            Die();
     }
 
     // Take damage
     protected void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0)
-            Die();
     }
 
     // Function called when the unit is dead
@@ -115,14 +123,4 @@ public abstract class Unit : MonoBehaviour
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
     }
-
-    public int health = 1;
-    public int damage = 1;
-    public float fireRate = 1;
-    public float range = 1;
-    public int viewAngle = 360;
-    public string enemyTag;
-    public float rotationSpeed = 0.5f;
-
-    protected Unit target = null;
 }

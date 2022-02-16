@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Unit
 {
+    public int moneyOnDeath = 100;
+    public float moveSpeed = 1;
+
+    private Transform waypointTarget;
+    private int waypointIndex = 0;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -20,7 +24,8 @@ public class Enemy : Unit
         if (target == null && waypointTarget != null)
         {
             MoveToNextWaypoint();
-            RotateTowardsTarget(waypointTarget.transform);
+            if (waypointTarget != null)
+                RotateTowardsTarget(waypointTarget.transform);
         }
         else if (target != null)
             RotateTowardsTarget(target.transform);
@@ -50,11 +55,6 @@ public class Enemy : Unit
     protected override void Die()
     {
         base.Die();
-        BuildManager.instance.addMoney(moneyOnDeath);
+        BuildManager.instance.AddMoney(moneyOnDeath);
     }
-
-    public int moneyOnDeath = 100;
-    public float moveSpeed = 1;
-    private Transform waypointTarget;
-    private int waypointIndex = 0;
 }

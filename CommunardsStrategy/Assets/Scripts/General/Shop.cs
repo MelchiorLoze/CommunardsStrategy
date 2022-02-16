@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
+    public int soldierCost = 100;
+    public int gunnerCost = 200;
+    public int canonCost = 500;
+    public int barrierCost = 300;
+
     private BuildManager buildManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,31 +19,26 @@ public class Shop : MonoBehaviour
 
     public void SelectBaseSoldier()
     {
-        buildManager.SetSoldierToBuild(buildManager.allySoldierPrefab, (int) unitCost.SOLDIER);
+        buildManager.SetUnitToBuild(buildManager.allySoldierPrefab, soldierCost);
     }
-    public void SelectCanon()
-    {
-        buildManager.SetSoldierToBuild(buildManager.allyCanonPrefab, (int) unitCost.CANON);
-    }
+
     public void SelectArtillerist()
     {
-        buildManager.SetSoldierToBuild(buildManager.allyArtilleristPrefab, (int)unitCost.ARTILLERIST);
+        buildManager.SetUnitToBuild(buildManager.allyGunnerPrefab, gunnerCost);
     }
+
+    public void SelectCanon()
+    {
+        buildManager.SetUnitToBuild(buildManager.allyCanonPrefab, canonCost);
+    }
+
     public void SelectBarrier()
     {
-        buildManager.SetSoldierToBuild(buildManager.allyBarrierPrefab,  (int)unitCost.SOLDIER, true);
+        buildManager.SetUnitToBuild(buildManager.allyBarrierPrefab,  barrierCost, true);
     }
 
     public void SellMode()
     {
-        buildManager.setSellMode();
-    }
-
-    private enum unitCost
-    {
-        SOLDIER = 100,
-        ARTILLERIST = 200,
-        CANON = 300,
-        BARRIER = 200
+        buildManager.SetSellMode();
     }
 }
