@@ -14,7 +14,7 @@ public class Ally : Unit
 
         if (target == null)
             return;
-
-        RotateTowardsTarget(target.transform);
+        else
+            RotateTowardsTarget(target.transform); // insuring the ally always faces the targeted enemy
     }
 }

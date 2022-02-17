@@ -16,20 +16,20 @@ public abstract class Unit : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        // Used to find a target every O.5 seconds
+        // Used to find a target every O.1 seconds
         InvokeRepeating("GetTarget", 0f, 0.1f);
 
         // Used to attack at the right firerate
         InvokeRepeating("Attack", 0f, 1 / fireRate);
     }
 
-    // Get the closest enemy that is in range
+    // Get the closest target that is focusable
     protected virtual void GetTarget()
     {
         // if target already selected
         if (target != null)
         {
-            // verifies if it is still in range
+            // verifies if it is still focusable
             float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
             if (isTargetFocusable(target, distanceToTarget))
                 return;
@@ -98,10 +98,11 @@ public abstract class Unit : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Function to draw the range sphere
+    // Function to draw the range sphere and field of view arc
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0.87f, 0f, 0f);
+        // draws the range of the Unit
         Gizmos.DrawWireSphere(transform.position, range);
 
         Handles.color = new Color(0.87f, 0f, 0f, 0.2f);
