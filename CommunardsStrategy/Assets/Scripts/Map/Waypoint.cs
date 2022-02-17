@@ -7,6 +7,7 @@ public class Waypoint : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //Gets entire list of waypoint
         waypoints = new Transform[transform.childCount];
 
         for (int i = 0; i < waypoints.Length; i++)
