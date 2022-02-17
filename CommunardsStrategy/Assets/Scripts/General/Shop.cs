@@ -17,6 +17,8 @@ public class Shop : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
+    //Functions linked to the menu button
+    //Set selected soldier in build manager + cost
     public void SelectBaseSoldier()
     {
         buildManager.SetUnitToBuild(buildManager.allySoldierPrefab, soldierCost);

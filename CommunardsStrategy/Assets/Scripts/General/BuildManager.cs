@@ -40,6 +40,8 @@ public class BuildManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    //Set which unit will be built on the slot
+    //Disable SellMode
     public void SetUnitToBuild(GameObject unit, int cost, bool _isBarrier = false)
     {
         unitToBuildPrefab = unit;
@@ -48,11 +50,14 @@ public class BuildManager : MonoBehaviour
         isInSellMode = false;
     }
 
+    //Remove money from bank depending on which soldier was built
     public void BuySoldier()
     {
         RemoveMoney(unitToBuildCost);
     }
 
+    //Set sell mode
+    //Set unit to be build to null, preventing player from building while in Sell mode
     public void SetSellMode()
     {
         isInSellMode = true;
@@ -65,6 +70,8 @@ public class BuildManager : MonoBehaviour
         return unitToBuildPrefab;
     }
 
+    //Set next background
+    //backgrounds are in the object as public var.
     public void ChangeBackground()
     {
         background.overrideSprite = backgrounds[nextBackground];
@@ -93,6 +100,7 @@ public class BuildManager : MonoBehaviour
         ChangeMoneyText();
     }
 
+    //Check if player has enough money to build the specified unit
     public bool IsBuildable()
     {
         return money - unitToBuildCost >= 0;

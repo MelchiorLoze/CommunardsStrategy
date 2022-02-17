@@ -10,6 +10,10 @@ public class Slot : MonoBehaviour
 
     private int unitOnSlotPrice;
 
+    #region OnMouseEvent
+    
+    //Sets different color to the slot by swapping sprite
+    //when player hover with mouse
     private void OnMouseOver()
     {
         if (IsSlotFree())
@@ -34,8 +38,8 @@ public class Slot : MonoBehaviour
             {
                 Destroy(unitOnSlot);
                 spriteRenderer.sprite = slotSprite;
-                spriteRenderer.enabled = true;
-                BuildManager.instance.AddMoney(unitOnSlotPrice / 3);
+                spriteRenderer.enabled = true;                       //re render slot sprite
+                BuildManager.instance.AddMoney(unitOnSlotPrice / 3); //when player sell one unit, give 1/3 of the original price back
                 return;
             }
         }
@@ -50,13 +54,15 @@ public class Slot : MonoBehaviour
             if (BuildManager.instance.IsBuildable())
             {
                 BuildManager.instance.BuySoldier();
-                unitOnSlot = (GameObject) Instantiate(soldierToBuild, transform.position, transform.rotation);
+                unitOnSlot = (GameObject)Instantiate(soldierToBuild, transform.position, transform.rotation);
                 spriteRenderer.enabled = false;
 
                 unitOnSlotPrice = BuildManager.instance.GetUnitToBuildCost();
             }
         }
     }
+    #endregion
+
 
     protected bool IsSlotFree()
     {
