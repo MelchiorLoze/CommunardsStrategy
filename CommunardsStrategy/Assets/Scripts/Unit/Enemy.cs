@@ -13,8 +13,6 @@ public class Enemy : Unit
     {
         base.Start();
         waypointTarget = Waypoint.waypoints[waypointIndex];
-        if (waypointTarget != null)
-            RotateTowardsTarget(waypointTarget);
     }
 
     // Update is called once per frame
@@ -23,14 +21,17 @@ public class Enemy : Unit
         base.Update();
         if (target == null && waypointTarget != null)
         {
+            // If no target is found, moves to next waypoint
             MoveToNextWaypoint();
             if (waypointTarget != null)
                 RotateTowardsTarget(waypointTarget.transform);
         }
         else if (target != null)
             RotateTowardsTarget(target.transform);
+        // In both cases rotates the unit towards either the waypoint or the target
     }
 
+    // Moves to the next waypoint according to the move speed
     void MoveToNextWaypoint()
     {
         Vector3 direction = waypointTarget.position - transform.position;
@@ -40,6 +41,7 @@ public class Enemy : Unit
             GetNextWaypoint();
     }
 
+    // Gets the next waypoint in the list
     void GetNextWaypoint()
     {
         if (waypointIndex < Waypoint.waypoints.Length - 1)
@@ -52,6 +54,7 @@ public class Enemy : Unit
             waypointTarget = null;
     }
 
+    // Function called when the unit is dead
     protected override void Die()
     {
         base.Die();
